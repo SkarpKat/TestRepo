@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "https://github.com/SkarpKat/TestRepo";
+
+
+service ChatService {
+    rpc Join (JoinRequest) returns (ChatMessage) {}
+    rpc Say (ChatMessage) returns (ChatMessage) {}
+    rpc Leave (LeaveRequest) returns (ChatMessage) {}
+}
+
+message LogicalClock {
+    int64 time = 1;
+}
+
+message JoinRequest {
+    string name = 1;
+    LogicalClock clock = 2; 
+}
+
+message ChatMessage {
+    string name = 1;
+    string message = 2;
+    LogicalClock clock = 3;
+}
+
+message LeaveRequest {
+    string name = 1;
+    LogicalClock clock = 2;
+}
+
+
